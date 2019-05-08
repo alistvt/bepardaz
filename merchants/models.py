@@ -9,7 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Merchant(User):
-    pass
+    # todo (ask): the best way to store phone number
+    phone = models.CharField(max_length=20, verbose_name=_('phone number'))
 
     class Meta:
         verbose_name = _("merchant")
@@ -23,7 +24,7 @@ class Merchant(User):
 class PaymentForm(models.Model):
     creator = models.ForeignKey(Merchant, related_name='payment_forms', on_delete=models.CASCADE, verbose_name=_('creator'))
     title = models.CharField(max_length=255, verbose_name=_('title'))
-    # todo : here ask for blank and null value
+    # todo (ask): for blank and null value
     description = models.TextField(blank=True, default='', verbose_name=_('description'))
     price = models.PositiveIntegerField(verbose_name=_('price'))
     link = models.CharField(max_length=36, verbose_name=_('link'))
