@@ -30,7 +30,7 @@ class PaymentForm(models.Model):
     link = models.CharField(max_length=36, verbose_name=_('link'))
     # times that link can be payed. 0 means infinitely.
     payable_times = models.PositiveSmallIntegerField(default=0, verbose_name=_('payable times'))
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('Creation Date'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('creation cate'))
 
     class Meta:
         verbose_name = _("payment form")
