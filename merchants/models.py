@@ -20,6 +20,12 @@ class Merchant(User):
         verbose_name_plural = _("merchants")
         ordering = ['last_name']
 
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = self.email
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return '{first_name} {last_name}'.format(fisrt_name=self.first_name, last_name=self.last_name)
 
@@ -31,7 +37,7 @@ class PaymentForm(models.Model):
     payment_amount = models.PositiveIntegerField(verbose_name=_('payment amount'))
     link = models.CharField(max_length=36, verbose_name=_('link'))
     # times that link can be payed. 0 means infinitely.
-    payable_times = models.PositiveSmallIntegerField(default=0, verbose_name=_('payable count'))
+    max_payments_count = models.PositiveSmallIntegerField(default=0, verbose_name=_('maximum payments count'))
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name=_('creation cate'))
 
     class Meta:
