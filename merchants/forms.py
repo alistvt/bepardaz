@@ -12,7 +12,7 @@ class MerchantCreationForm(UserCreationForm):
     """
     class Meta:
         model = Merchant
-        fields = ('phone', 'email', 'password1', 'password2', 'first_name', 'last_name', )
+        fields = ('phone_number', 'email', 'password1', 'password2', 'first_name', 'last_name', )
 
     def save(self, commit=True):
         merchant = super().save(commit=False)
