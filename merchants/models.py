@@ -27,7 +27,7 @@ class Merchant(User):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return '{first_name} {last_name}'.format(fisrt_name=self.first_name, last_name=self.last_name)
+        return '{first_name} {last_name}'.format(first_name=self.first_name, last_name=self.last_name)
 
 
 class PaymentForm(models.Model):
