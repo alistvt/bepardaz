@@ -32,6 +32,7 @@ class Transaction(models.Model):
                                      on_delete=models.DO_NOTHING, verbose_name=_('payment form'))
     payment_amount = models.PositiveIntegerField(verbose_name=_('payment amount'))
     status_code = models.IntegerField(null=True, verbose_name=_("status code"))
+    status = models.SmallIntegerField(default=0, choices=((0, _('pending')), (1, _('successful')), (2, _('failed'))))
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name=_('creation date'))
 
     class Meta:
