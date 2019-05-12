@@ -25,22 +25,19 @@ class Merchant(User):
 
 
 class PaymentForm(models.Model):
-    # todo change  to owner
-    creator = models.ForeignKey(Merchant, related_name='payment_forms', on_delete=models.CASCADE, verbose_name=_('creator'))
+    creator = models.ForeignKey(Merchant, related_name='payment_forms', on_delete=models.CASCADE, verbose_name=_('owner'))
     title = models.CharField(max_length=255, verbose_name=_('title'))
-    # todo (ask): for blank and null value
-    description = models.TextField(blank=True, default='', verbose_name=_('description'))
-    price = models.PositiveIntegerField(verbose_name=_('price'))
+    description = models.TextField(blank=True, null=True, verbose_name=_('description'))
+    payment_amount = models.PositiveIntegerField(verbose_name=_('payment amount'))
     link = models.CharField(max_length=36, verbose_name=_('link'))
     # times that link can be payed. 0 means infinitely.
-    # todo change name to ..
-    payable_times = models.PositiveSmallIntegerField(default=0, verbose_name=_('payable times'))
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('creation cate'))
+    payable_times = models.PositiveSmallIntegerField(default=0, verbose_name=_('payable count'))
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name=_('creation cate'))
 
     class Meta:
         verbose_name = _("payment form")
         verbose_name_plural = _("payment forms")
-        ordering = ['-created_date']
+        ordering = ['-creation_date']
 
     def __str__(self):
         return '{title}'.format(title=self.title)
