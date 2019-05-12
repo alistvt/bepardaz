@@ -22,7 +22,7 @@ class MerchantAdmin(admin.ModelAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('phone_number', 'first_name', 'last_name', 'password1', 'password2'),
+            'fields': ('phone_number', 'email', 'first_name', 'last_name', 'password1', 'password2'),
         }),
     )
     change_password_form = AdminPasswordChangeForm
