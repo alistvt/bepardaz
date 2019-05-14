@@ -14,4 +14,3 @@ class MerchantSignUpView(generics.CreateAPIView):
     queryset = Merchant.objects.all()
     serializer_class = MerchantSignUpSerializer
     permission_classes = []
-
