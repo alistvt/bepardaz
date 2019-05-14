@@ -1,4 +1,5 @@
 # from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
 from merchants.models import Merchant
@@ -28,9 +29,6 @@ class MerchantSignUpSerializer(serializers.ModelSerializer):
                 'write_only': True,
             }
         }
-
-    def validate_phone(self, value):
-        pass
 
     def validate(self, attrs):
         confirm_password = attrs.pop('confirm_password', None)
