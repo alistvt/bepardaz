@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Merchant(User):
-    phone_number = models.CharField(max_length=20,
+    phone_number = models.CharField(unique=True, max_length=20,
                                     verbose_name=_('phone number'),
                                     validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                                                message=_("entered phone number is invalid."))])
