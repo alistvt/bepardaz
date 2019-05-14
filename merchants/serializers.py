@@ -2,7 +2,7 @@
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
-from merchants.models import Merchant
+from merchants.models import Merchant, PaymentForm
 
 
 class MerchantSignUpSerializer(serializers.ModelSerializer):
@@ -43,3 +43,23 @@ class MerchantSignUpSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class CreatePaymentFormSerializer(serializers.ModelSerializer):
+    model = PaymentForm
+    fields = ('title', 'description', 'payment_amount', 'link', 'max_payments_count', )
+    extra_kwargs = {
+        'title': {
+            'required': True,
+        },
+        'description': {
+            'required': True,
+        },
+        'payment_amount': {
+            'required': True,
+        },
+    }
+
+    def create(self, validated_data):
+        user = validated_data['user']
+        owner = Merchant.objects.get(pk=user.pk)

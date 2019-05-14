@@ -2,10 +2,11 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics, serializers, filters
 
-from .models import Merchant
-from .serializers import MerchantSignUpSerializer
+from .models import Merchant, PaymentForm
+from .serializers import MerchantSignUpSerializer, CreatePaymentFormSerializer
 
 # Create your views here.
 
@@ -14,3 +15,14 @@ class MerchantSignUpView(generics.CreateAPIView):
     queryset = Merchant.objects.all()
     serializer_class = MerchantSignUpSerializer
     permission_classes = []
+
+
+class CreatePaymentFormView(generics.CreateAPIView):
+    queryset = PaymentForm.objects.all()
+    serializer_class = CreatePaymentFormSerializer
+    # TODO : v
+    permission_classes = (IsAuthenticated, )
+
+    def perform_create(self, serializer):
+        serializer.validated_data['user'] = self.request.user
+        return serializer.create(serializer.validated_data)
