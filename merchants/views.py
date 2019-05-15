@@ -31,9 +31,9 @@ class MerchantProfileActionsView(generics.RetrieveUpdateAPIView):
 class CreatePaymentFormView(generics.CreateAPIView):
     queryset = PaymentForm.objects.all()
     serializer_class = CreatePaymentFormSerializer
-    # TODO : v
     permission_classes = (IsAuthenticated, )
 
     def perform_create(self, serializer):
+        # TODO ?
         serializer.validated_data['user'] = self.request.user
         return serializer.create(serializer.validated_data)

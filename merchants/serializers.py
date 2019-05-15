@@ -57,21 +57,29 @@ class MerchantProfileActionsSerializer(serializers.ModelSerializer):
 
 
 class CreatePaymentFormSerializer(serializers.ModelSerializer):
-    model = PaymentForm
-    fields = ('title', 'description', 'payment_amount', 'link', 'max_payments_count', )
-    extra_kwargs = {
-        'title': {
-            'required': True,
-        },
-        'description': {
-            'required': True,
-        },
-        'payment_amount': {
-            'required': True,
-        },
-    }
+    class Meta:
+        model = PaymentForm
+        fields = ('owner', 'title', 'description', 'payment_amount', 'link', 'max_payments_count', )
+        extra_kwargs = {
+            'owner': { # TODO ?
+                'read_only': True,
+            },
+            'title': {
+                'required': True,
+            },
+            'description': {
+                'required': True,
+            },
+            'payment_amount': {
+                'required': True,
+            },
+            'link': {
+                'required': False,
+            },
+        }
 
     def create(self, validated_data):
-        # break point to see the flow
-        user = validated_data['user']
-        owner = Merchant.objects.get(pk=user.pk)
+        user = validated_data.pop('user')
+        self.validated_data['owner'] = Merchant.objects.get(pk=user.pk)
+        payment_form = super().create(validated_data)
+        return payment_form
