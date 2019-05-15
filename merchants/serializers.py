@@ -45,6 +45,17 @@ class MerchantSignUpSerializer(serializers.ModelSerializer):
         return user
 
 
+class MerchantProfileActionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Merchant
+        fields = ('phone_number', 'email', 'first_name', 'last_name', )
+        extra_kwargs = {
+            'phone_number': {
+                'read_only': True,
+            },
+        }
+
+
 class CreatePaymentFormSerializer(serializers.ModelSerializer):
     model = PaymentForm
     fields = ('title', 'description', 'payment_amount', 'link', 'max_payments_count', )

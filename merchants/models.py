@@ -22,8 +22,7 @@ class Merchant(User):
 
     def save(self, *args, **kwargs):
         if not self.username:
-            pass
-        self.username = self.phone_number
+            self.username = self.phone_number
 
         super().save(*args, **kwargs)
 
