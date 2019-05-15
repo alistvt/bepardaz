@@ -11,9 +11,9 @@ class MerchantSignUpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Merchant
-        fields = ('phone', 'username', 'email', 'first_name', 'last_name', 'password', 'confirm_password', )
+        fields = ('phone_number', 'email', 'first_name', 'last_name', 'password', 'confirm_password', )
         extra_kwargs = {
-            'phone': {
+            'phone_number': {
                 'required': True,
             },
             'email': {
@@ -61,5 +61,6 @@ class CreatePaymentFormSerializer(serializers.ModelSerializer):
     }
 
     def create(self, validated_data):
+        # break point to see the flow
         user = validated_data['user']
         owner = Merchant.objects.get(pk=user.pk)

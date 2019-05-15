@@ -4,6 +4,6 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^signup/$', views.MerchantSignUpView, name='merchant-sign-up'),
-    url(r'^createpf/$', views.MerchantSignUpView, name='merchant-create-payment-form'),
+    url(r'^signup/$', views.MerchantSignUpView.as_view(), name='merchant-sign-up'),
+    url(r'^createpf/$', views.MerchantSignUpView.as_view(), name='merchant-create-payment-form'),
 ]
