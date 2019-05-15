@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import uuid
+
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
@@ -31,11 +33,11 @@ class Merchant(User):
 
 
 class PaymentForm(models.Model):
-    creator = models.ForeignKey(Merchant, related_name='payment_forms', on_delete=models.CASCADE, verbose_name=_('owner'))
+    owner = models.ForeignKey(Merchant, related_name='payment_forms', on_delete=models.CASCADE, verbose_name=_('owner'))
     title = models.CharField(max_length=255, verbose_name=_('title'))
     description = models.TextField(blank=True, null=True, verbose_name=_('description'))
     payment_amount = models.PositiveIntegerField(verbose_name=_('payment amount'))
-    link = models.CharField(max_length=36, verbose_name=_('link'))
+    link = models.CharField(unique=True, max_length=36, verbose_name=_('link'))
     # times that link can be payed. 0 means infinitely.
     max_payments_count = models.PositiveSmallIntegerField(default=0, verbose_name=_('maximum payments count'))
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name=_('creation cate'))
@@ -47,3 +49,21 @@ class PaymentForm(models.Model):
 
     def __str__(self):
         return '{title}'.format(title=self.title)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            if not self.link:
+                self.link = PaymentForm.generate_link()
+
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def generate_link():
+        while True:
+            link = uuid.uuid4().hex
+            try:
+                PaymentForm.objects.get(link=link)
+            except PaymentForm.DoesNotExist:
+                return link
+
+
