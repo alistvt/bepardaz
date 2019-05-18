@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', authtoken_views.obtain_auth_token, name='api-token-auth'),
     url(r'^merchants/', include('merchants.urls', namespace='merchants')),
+    url(r'^transactions/', include('transactions.urls', namespace='transactions')),
 ]
