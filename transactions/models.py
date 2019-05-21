@@ -27,12 +27,19 @@ class Payer(User):
 
 
 class Transaction(models.Model):
+    class Status:
+        PENDING = 0
+        SUCCESSFUL = 1
+        FAILED = 2
+    authority = models.CharField(max_length=36, verbose_name=_('authority'))
     payer = models.ForeignKey(Payer, related_name='transactions', on_delete=models.DO_NOTHING, verbose_name=_('payer'))
     payment_form = models.ForeignKey(PaymentForm, related_name='transactions',
                                      on_delete=models.DO_NOTHING, verbose_name=_('payment form'))
     payment_amount = models.PositiveIntegerField(verbose_name=_('payment amount'))
     status_code = models.IntegerField(null=True, verbose_name=_("status code"))
-    status = models.SmallIntegerField(default=0, choices=((0, _('pending')), (1, _('successful')), (2, _('failed'))))
+    status = models.SmallIntegerField(default=Status.PENDING, choices=((Status.PENDING, _('pending')),
+                                                                       (Status.SUCCESSFUL, _('successful')),
+                                                                       (Status.FAILED, _('failed'))))
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name=_('creation date'))
 
     class Meta:
