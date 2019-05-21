@@ -66,11 +66,24 @@ img.social-icon {
   color: tomato;
   font-size: 18px;
   font-weight: bold;
-  border: solid 2px tomato;
+  border: solid 1px tomato;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
 }
 input {
   text-align: center;
+}
+
+#submit-button {
+  background-color: tomato;
+  border: solid 1px #eee;
+
+}
+#submit-button:hover {
+  background-color: hsla(9, 100%, 64%, 0.9);
+
+}
+.fa {
+  border-color: black;
 }

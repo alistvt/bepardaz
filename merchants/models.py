@@ -57,6 +57,11 @@ class PaymentForm(models.Model):
 
         super().save(*args, **kwargs)
 
+    def times_payed(self):
+        return self.transactions.all().count()
+
+    times_payed.short_description = _('times payed')
+
     @staticmethod
     def generate_link():
         while True:
