@@ -1,0 +1,106 @@
+{% load staticfiles %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% trans "Bepardaz" %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- rtl bootstrap -->
+    <!-- {% ifequal LANGUAGE_CODE 'fa' %}
+        <script rel="stylesheet" href="{% static 'bootstrap-rtl.css' %}"></script>
+        <script rel="stylesheet" href="{% static 'bootstrap-rtl.min.css' %}"></script>
+    {% endifequal %} -->
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Extra CDNs -->
+    {% block headcdn %}
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/payment_form.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+
+  <!--<body style="background-image: url('https://i.pinimg.com/originals/8d/fd/e3/8dfde31d2c96cf6042f8152506ef6a4b.gif'); background-repeat: no-repeat; background-position-x: center;background-position-y: 10%;background-size: cover;">-->
+    <body>
+
+    <div class="container">
+      <div class="jumbotron myjumbotron">
+        <div class="row">
+          <div class="col-md-7 leftside">
+            <form method="POST">
+             {% csrf_token %}
+             <p id="payment_amount">{{ pf.payment_amount }} Tomans</p>
+             <div class="input-group mb-3 input-group-lg">
+               <div class="input-group-prepend">
+                 <span class="input-group-text "><i class="fas fa-user-o"></i></span>
+               </div>
+               <input type="text" class="form-control" placeholder="Fistname Lastname">
+             </div>
+             <div class="input-group mb-3 input-group-lg myinputs">
+               <div class="input-group-prepend">
+                 <span class="input-group-text">Large</span>
+               </div>
+               <input type="text" class="form-control" placeholder="Email">
+             </div>
+                <div class="input-group mb-3 input-group-lg">
+               <div class="input-group-prepend">
+                 <span class="input-group-text">Large</span>
+               </div>
+               <input type="text" class="form-control" placeholder="Phone Number">
+             </div>
+             <div class="input-group mb-3 input-group-lg myinputs">
+               <div class="input-group-prepend">
+                 <span class="input-group-text">Large</span>
+               </div>
+               <input type="text" class="form-control" placeholder="Notes">
+             </div>
+            </form>
+          </div>
+
+          <div class="col-md-5 rightside">
+            <p class="reciever-name">{{ pf.owner.first_name }} {{ pf.owner.last_name }}</p>
+            <div class="row">
+              <div class="col-md-3"></div>
+{#              <div class="col-md-2">#}
+{#                <img src="{% static 'icon/social1.png' %}" alt="" class="social-icon">#}
+{#              </div>#}
+{#              <div class="col-md-2">#}
+{#                <img src="{% static 'icon/social2.png' %}" alt="" class="social-icon">#}
+{#              </div>#}
+{#              <div class="col-md-2">#}
+{#                <img src="{% static 'icon/social3.png' %}" alt="" class="social-icon">#}
+{#              </div>#}
+              <div class="col-md-3"></div>
+            </div>
+            <hr id="separator">
+            <h4 class="title">{{ pf.title }}</h4>
+            <p class="description">{{ pf.description }}</p>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!--======================= SCRIPTS =======================-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+  </body>
+</html>

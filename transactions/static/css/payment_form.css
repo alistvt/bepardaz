@@ -1,0 +1,76 @@
+/* Make the image fully responsive */
+body {
+  /* background-image: linear-gradient(red, yellow); */
+   background-color: hsla(9, 100%, 64%, 0.9); /* tomato */
+}
+.myjumbotron {
+  border-style: solid;
+  border-width: 0px;
+  border-color: white;
+  background-color: white;
+  border-radius: 10px;
+  margin: 5% 15%;
+  padding: 0%;
+  /* border-padding: 10% 20%; */
+}
+.rightside {
+  background-color: #eee;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  border-radius: 0px 10px 10px 0px;
+  padding: 4% 4%;
+
+}
+.leftside {
+  padding: 4% 4%;
+
+}
+p.description {
+  font-size: 14px;
+  text-align: justify;
+}
+p.reciever-name {
+  font-size: 12px;
+  text-align: center;
+}
+h4.title {
+  text-align: center;
+}
+img.social-icon {
+  width: 150%;
+  height: 150%;
+  margin: auto;
+}
+.myinputs {
+
+  vertical-align: middle;
+  text-align: center;
+}
+#separator {
+  border-width: 2px;
+  border-color: #888;
+}
+#profile-pic {
+  display: block;
+  margin-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 22%;
+  height: 22%;
+  /* height: auto; */
+
+}
+
+#payment_amount {
+  color: tomato;
+  font-size: 18px;
+  font-weight: bold;
+  border: solid 2px tomato;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+input {
+  text-align: center;
+}
