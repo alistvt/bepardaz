@@ -31,7 +31,7 @@ class Transaction(models.Model):
         PENDING = 0
         SUCCESSFUL = 1
         FAILED = 2
-    authority = models.CharField(max_length=36, verbose_name=_('authority'))
+    authority = models.CharField(max_length=36, default='', verbose_name=_('authority'))
     payer = models.ForeignKey(Payer, related_name='transactions', on_delete=models.DO_NOTHING, verbose_name=_('payer'))
     payment_form = models.ForeignKey(PaymentForm, related_name='transactions',
                                      on_delete=models.DO_NOTHING, verbose_name=_('payment form'))
